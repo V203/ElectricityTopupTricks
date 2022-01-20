@@ -9,7 +9,7 @@ module.exports = function (pool) {
 
 	// for a given street show all the meters and their balances
 	async function streetMeters(streetId) {
-		let results = await pool.query(`select * from electricity_meter join  street on street_id = electricity_meter.street_id where street_id = ${streetId} `);
+		let results = await pool.query(`select * from electricity_meter join  street on street.id = electricity_meter.street_id where street_id = ${streetId} `);
 		console.log(results.rows);
 		return results.rows
 	}
@@ -37,13 +37,20 @@ module.exports = function (pool) {
 		await pool.query(`update electricity_meter set balance = balance - ${units} where electricity_meter.id = ${meterId} `);
 	}
 
+	let lowestBalanceMeter = async ()=>{
+		let  results = await pool.query(`select * from electricity_meter join street on street.id = electricity_meter.street_id group by electricity_meter.id,electricity_meter.id`);
+		console.log(results.rows);
+		return results.rows
+	}
+
 	return {
 		streets,
 		streetMeters,
 		appliances,
 		topupElectricity,
 		meterData,
-		useElectricity
+		useElectricity,
+		lowestBalanceMeter
 	}
 
 
