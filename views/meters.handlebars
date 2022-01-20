@@ -10,10 +10,16 @@
     {{#each meters}}
     <tr>
 
-        <td>{{name}}</td>
-        <td>{{balance}}</td>
-        <td>{{street_number}}</td>
+       <td><a href="/meters/use/{{street_number}}"> {{name}}</a></td>
+        <td><a href="">{{balance}}</td><a/></td>
+        <td> <a href="">{{street_number}}</a> </td>
+        
 
     </tr>
     {{/each}}
 </table>
+
+
+{{#each streets}}
+<li> <a href="{{id}}">{{name}}</a> </li>
+{{/each}}
