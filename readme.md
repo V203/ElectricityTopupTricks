@@ -1,5 +1,5 @@
 
-https://app.travis-ci.com/V203/ElectricityTopupTricks.svg?branch=main
+[![Build Status](https://app.travis-ci.com/V203/ElectricityTopupTricks.svg?branch=main)](https://app.travis-ci.com/V203/ElectricityTopupTricks)
 
 # ElectricityTopupTricks
 
