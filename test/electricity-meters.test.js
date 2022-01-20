@@ -59,28 +59,41 @@ describe("The Electricity meter", function() {
 			{ id: 5, name: 'Kettle', rate: '2.70' }
 		  ]
 		  
-		console.log(appliances);
+		// console.log(appliances);
 		assert.deepStrictEqual(expected, appliances);
 
 	});
 
-	// it("should be able to topup electricity", async function() {
+	it("should be able to topup electricity", async function() {
 
-	// 	const electricityMeters = ElectricityMeters(pool);
-	// 	const appliances = await electricityMeters.topupElectricity(3, 20);
-	// 	const meterData = await electricityMeters.meterData(3);
-	// 	assert.deepStrictEqual(70, meterData.balance);
+		const electricityMeters = ElectricityMeters(pool);
+		const appliances = await electricityMeters.topupElectricity(3, 20);
+		
+		const meterData = await electricityMeters.meterData(3);
+		
+		assert.deepStrictEqual(70, Number(meterData.balance));
 
-	// });
+	});
 
-	// it("should be able to use electricity", async function() {
+	it("should be able to use electricity", async function() {
 
-	// 	const electricityMeters = ElectricityMeters(pool);
-	// 	const appliances = await electricityMeters.useElectricity(2, 20);
-	// 	const meterData = await electricityMeters.meterData(2);
-	// 	assert.deepStrictEqual(30, meterData.balance);
+		const electricityMeters = ElectricityMeters(pool);
+		const appliances = await electricityMeters.useElectricity(2, 20);
+		const meterData = await electricityMeters.meterData(2);
+		assert.deepStrictEqual(30, Number(meterData.balance));
 
-	// });
+	});
+
+	it('We should be able select A street using the join clause', async ()=> {
+		const electricityMeters = ElectricityMeters(pool);
+		let actual = await electricityMeters.streetMeters(1);
+		console.log(actual);
+		let expected = ""
+
+
+		assert.deepStrictEqual(expected,actual);
+
+	})
 
 	this.afterAll(function() {
 		pool.end();
