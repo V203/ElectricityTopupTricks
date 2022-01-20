@@ -9,17 +9,13 @@
     </tr>
     {{#each meters}}
     <tr>
-
-       <td><a href="/meters/use/{{street_number}}"> {{name}}</a></td>
-        <td><a href="">{{balance}}</td><a/></td>
-        <td> <a href="">{{street_number}}</a> </td>
         
 
+       <td><a href="/meters/use/{{id}}"> {{name}}</a></td>
+        <td>{{balance}}</td></td>
+        <td> {{street_number}}</td>
+
+
     </tr>
-    {{/each}}
+            {{/each}}
 </table>
-
-
-{{#each streets}}
-<li> <a href="{{id}}">{{name}}</a> </li>
-{{/each}}

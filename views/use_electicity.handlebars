@@ -6,8 +6,16 @@
 
 <h1>Balance: {{meters_id.balance}}</h1>
 
-<form action="/meters/use/{{meters_id.street_number}}" method="post">
+<form action="/meters/use/{{meters_id.id}}" method="post">
 
+<select name="used_appliance" id="">
+    <option value=""> <p>--Select an Appliance--</p> </option>
+    {{#each appliance}}
+    <option value="{{rate}}"> {{rate}}  {{name}}</option>
+    {{/each}}
+</select>
+
+<input type="submit" value="Use Appliance">
 
 
 </form>

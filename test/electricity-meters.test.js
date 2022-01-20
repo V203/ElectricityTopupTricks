@@ -127,7 +127,32 @@ describe("The Electricity meter", function () {
 
 
 		let actual = await electricityMeters.lowestBalanceMeter();
-		let expected = ""
+		let expected = [
+			{
+				id: 2,
+				street_number: '6',
+				street_id: 1,
+				balance: '30.00',
+				meter_number: null
+			}
+		]
+
+		console.log(actual);
+		assert.deepStrictEqual(expected, actual);
+
+	});
+
+
+	it("We should be able to return the house hold with the Highest  balance", async () => {
+
+		const electricityMeters = ElectricityMeters(pool);
+
+		await electricityMeters.topupElectricity(3, 20);
+		let actual = await electricityMeters.highestBalanceStreet();
+		let expected = [ { name: 'Miller Street', sum: '170.00' } ]
+
+
+
 		console.log(actual);
 		assert.deepStrictEqual(expected, actual);
 

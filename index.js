@@ -11,9 +11,9 @@ const ElectricityMeters = require('./electricity-meters');
 const connectionString = process.env.DATABASE_URL || 'postgresql://codex-coder:pg123@localhost:5432/topups';
 
 const pool = new Pool({
-	connectionString,ssl: {
+	connectionString, ssl: {
 		rejectUnauthorized: false
-	  }
+	}
 });
 
 // enable the req.body object - to allow us to use HTML forms
@@ -53,7 +53,7 @@ app.get('/meters/:street_id', async function (req, res) {
 	// create  template called street_meters.handlebars
 	// in there loop over all the meters and show them on the screen.
 	// show the street number and name and the meter balance
-
+	console.log(meters);
 	res.render('meters', {
 		meters, street_id,
 		streets
@@ -74,9 +74,15 @@ app.get('/meters/use/:meter_id', async function (req, res) {
 });
 
 app.post('/meters/use/:meter_id', async function (req, res) {
+	let meter_id = Number(req.params.meter_id);
+	let used_appliance = Number(req.body.used_appliance)
+	console.log( used_appliance);
+	console.log( meter_id);
 
+	let appliances = await electricityMeters.appliances();
+	await electricityMeters.useElectricity(meter_id,used_appliance);
 	// update the meter balance with the usage of the appliance selected.
-	res.render(`/meters/user/${req.params.meter_id}`);
+	res.redirect(`/meters/use/${req.params.meter_id}`);
 
 });
 
