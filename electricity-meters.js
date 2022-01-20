@@ -13,7 +13,8 @@ module.exports = function(pool) {
 	}
 
 	// return all the appliances
-	function appliances() {
+	async function appliances() {
+		return (await pool.query(`select * from appliance`)).rows;
 
 	}
 
