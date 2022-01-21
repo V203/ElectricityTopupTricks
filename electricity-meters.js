@@ -9,7 +9,7 @@ module.exports = function (pool) {
 
 	// for a given street show all the meters and their balances
 	async function streetMeters(streetId) {
-		let results = await pool.query(`select * from electricity_meter join  street on street.id = electricity_meter.street_id where street_id = ${streetId} `);
+		let results = await pool.query(`select * from electricity_meter join  street on street.id = electricity_meter.street_id where street_id = ${streetId} order by electricity_meter.street_number desc`);
 		// console.log(results.rows);
 		return results.rows
 	}
@@ -45,13 +45,13 @@ module.exports = function (pool) {
 
 	let highestBalanceStreet = async () => {
 		let results = await pool.query(`select name, sum(balance) from electricity_meter join  street on street.id = electricity_meter.street_id group by street.name order by sum desc limit 1`);
-		console.log(results.rows);
+		// console.log(results.rows);
 		return results.rows
 
 	}
 
 	let streetBalances = async () => {
-		return (await pool.query(`select name, sum(balance) from electricity_meter join  street on street.id = electricity_meter.street_id group by street.name order by sum`)).rows
+		return (await pool.query(`select name, sum(balance) from electricity_meter join  street on street.id = electricity_meter.street_id group by street.name order by name desc`)).rows
 	}
 
 	return {

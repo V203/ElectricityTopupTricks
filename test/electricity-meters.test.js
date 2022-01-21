@@ -80,32 +80,33 @@ describe("The Electricity meter", function () {
 		const electricityMeters = ElectricityMeters(pool);
 		let actual = await electricityMeters.streetMeters(2);
 		// console.log(actual);
-		let expected = [
+		let expected =[
 			{
-				id: 2,
-				street_number: '12',
-				street_id: 2,
-				balance: '50.00',
-				meter_number: null,
-				name: 'Mathaba Crescent'
+			  id: 2,
+			  street_number: '7',
+			  street_id: 2,
+			  balance: '50.00',
+			  meter_number: null,
+			  name: 'Mathaba Crescent'
 			},
 			{
-				id: 2,
-				street_number: '7',
-				street_id: 2,
-				balance: '50.00',
-				meter_number: null,
-				name: 'Mathaba Crescent'
+			  id: 2,
+			  street_number: '5',
+			  street_id: 2,
+			  balance: '50.00',
+			  meter_number: null,
+			  name: 'Mathaba Crescent'
 			},
 			{
-				id: 2,
-				street_number: '5',
-				street_id: 2,
-				balance: '50.00',
-				meter_number: null,
-				name: 'Mathaba Crescent'
+			  id: 2,
+			  street_number: '12',
+			  street_id: 2,
+			  balance: '50.00',
+			  meter_number: null,
+			  name: 'Mathaba Crescent'
 			}
-		]
+		  ]
+		  
 
 		assert.deepStrictEqual(expected, actual);
 
@@ -146,12 +147,13 @@ describe("The Electricity meter", function () {
 	it("We should be to return the total sum of the street balances", async () => {
 		const electricityMeters = ElectricityMeters(pool);
 		let actual = await electricityMeters.streetBalances();
-		
+		// console.log(actual);
 		let expected = [
-			{ name: 'Mathaba Crescent', sum: '150.00' },
 			{ name: 'Vilakazi Road', sum: '150.00' },
-			{ name: 'Miller Street', sum: '170.00' }
-		]
+			{ name: 'Miller Street', sum: '170.00' },
+			{ name: 'Mathaba Crescent', sum: '150.00' }
+		  ]
+		  
 
 		assert.deepStrictEqual(expected, actual);
 	})
