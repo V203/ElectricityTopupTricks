@@ -37,17 +37,21 @@ module.exports = function (pool) {
 		await pool.query(`update electricity_meter set balance = balance - ${units} where electricity_meter.id = ${meterId} `);
 	}
 	//join street on street.id = electricity_meter.street_id group by electricity_meter.id,electricity_meter.id
-	let lowestBalanceMeter = async ()=>{
-		let  results = await pool.query(`select *  from electricity_meter where balance = (select min(balance) from electricity_meter )`);
+	let lowestBalanceMeter = async () => {
+		let results = await pool.query(`select *  from electricity_meter where balance = (select min(balance) from electricity_meter )`);
 		// console.log(results.rows);
 		return results.rows
 	}
 
-	let highestBalanceStreet =async  ()=>{
-	let results = 	await pool.query(`select name, sum(balance) from electricity_meter join  street on street.id = electricity_meter.street_id group by street.name order by sum desc limit 1`);
-	console.log(results.rows);
-	return results.rows
+	let highestBalanceStreet = async () => {
+		let results = await pool.query(`select name, sum(balance) from electricity_meter join  street on street.id = electricity_meter.street_id group by street.name order by sum desc limit 1`);
+		console.log(results.rows);
+		return results.rows
 
+	}
+
+	let streetBalances = async () => {
+		return (await pool.query(`select name, sum(balance) from electricity_meter join  street on street.id = electricity_meter.street_id group by street.name order by sum`)).rows
 	}
 
 	return {
@@ -58,7 +62,8 @@ module.exports = function (pool) {
 		meterData,
 		useElectricity,
 		lowestBalanceMeter,
-		highestBalanceStreet
+		highestBalanceStreet,
+		streetBalances
 	}
 
 

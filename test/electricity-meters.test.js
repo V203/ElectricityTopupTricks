@@ -38,14 +38,6 @@ describe("The Electricity meter", function () {
 
 	});
 
-	// it("should see all the appliances", async function() {
-
-	// 	const electricityMeters = ElectricityMeters(pool);
-	// 	const appliances = await electricityMeters.appliances();
-
-	// 	assert.deepStrictEqual([], appliances);
-
-	// });
 
 	it("should see all the appliances", async function () {
 
@@ -145,11 +137,24 @@ describe("The Electricity meter", function () {
 
 		await electricityMeters.topupElectricity(3, 20);
 		let actual = await electricityMeters.highestBalanceStreet();
-		let expected = [ { name: 'Miller Street', sum: '170.00' } ]
+		let expected = [{ name: 'Miller Street', sum: '170.00' }]
 
 		assert.deepStrictEqual(expected, actual);
 
 	});
+
+	it("We should be to return the total sum of the street balances", async () => {
+		const electricityMeters = ElectricityMeters(pool);
+		let actual = await electricityMeters.streetBalances();
+		
+		let expected = [
+			{ name: 'Mathaba Crescent', sum: '150.00' },
+			{ name: 'Vilakazi Road', sum: '150.00' },
+			{ name: 'Miller Street', sum: '170.00' }
+		]
+
+		assert.deepStrictEqual(expected, actual);
+	})
 
 	this.afterAll(function () {
 		pool.end();

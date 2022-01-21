@@ -1,5 +1,6 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
+const req = require('express/lib/request');
 const pg = require('pg');
 const Pool = pg.Pool;
 
@@ -86,7 +87,22 @@ app.post('/meters/use/:meter_id', async function (req, res) {
 
 });
 
+app.get("/appliances", async (req,res)=>{
+	let appliances = await electricityMeters.appliances()
+	res.render("appliances",{appliances})
+
+})
+
+app.get("/street/balances",async (req,res)=>{
+	let streetBalances = await electricityMeters.streetBalances();
+	// console.log(streetBalances);
+	res.render("balances",{streetBalances});
+
+
+});
+
 // start  the server and start listening for HTTP request on the PORT number specified...
 app.listen(PORT, function () {
 	console.log(`App started on port ${PORT}`)
 });
+
