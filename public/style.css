@@ -13,3 +13,12 @@ table, th, td {
   border: 1px solid black;
   border-collapse: collapse;
 }
+
+.flexRow{
+	display: flex;
+	flex-flow: row;
+}
+span{
+	margin: 3px 3px 3px 3px;
+	padding: 3px 3px 3px 3px;
+}
